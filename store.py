@@ -3,7 +3,6 @@ from products import Product
 
 
 class Store:
-    """Define functions for store options"""
     def __init__(self, products: List[Product]):
         self.products = products
 

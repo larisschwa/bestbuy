@@ -28,11 +28,12 @@ def start(store_obj):
             item_number = input("Enter the item number for the order: ")
             try:
                 item_number = int(item_number)
-                selected_product = store_obj.get_all_products()
-                [item_number - 1]
+                selected_product = store_obj.get_all_products()[
+                    item_number - 1]
                 quantity = int(input("Enter the quantity: "))
                 try:
-                    order_price = store_obj.order([(selected_product, quantity)])
+                    order_price = store_obj.order(
+                        [(selected_product, quantity)])
                     print(f"Order cost: {order_price} dollars.\n")
                 except ValueError as error:
                     print(f"Order failed: {str(error)}\n")
@@ -47,16 +48,19 @@ def start(store_obj):
             print("Invalid choice. Please enter a number from 1 to 4.\n")
 
 
-if __name__ == "__main__":
+def main():
     """Setup initial stock of inventory"""
-    def main():
-
-        product_list = [
-            products.Product("MacBook Air M2", price=1450, quantity=100),
-            products.Product("Bose QuietComfort Earbuds", price=250,
-                             quantity=500),
-            products.Product("Google Pixel 7", price=500, quantity=250)
+    product_list = [
+        products.Product("MacBook Air M2", price=1450, quantity=100),
+        products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
+        products.Product("Google Pixel 7", price=500, quantity=250),
+        products.NonStockedProduct("Windows License", price=125),
+        products.LimitedProduct("Shipping", price=10, quantity_limit=250)
         ]
-        best_buy = store.Store(product_list)
+    best_buy = store.Store(product_list)
 
-        start(best_buy)
+    start(best_buy)
+
+
+if __name__ == "__main__":
+    main()
